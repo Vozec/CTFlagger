@@ -1,2 +1,2 @@
 # CTFileScan-WEB
-This websiteis used to scan automatically files during CTF.
+This website is used to scan automatically files during CTF.
