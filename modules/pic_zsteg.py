@@ -23,15 +23,13 @@ def Filter(filename):
 		f = open(filename,'w')
 		f.write(final)
 		f.close()
+	return final
 
 def scan(config):
 	config_current = help()
 	path1 = '%s/zsteg.txt'%config['env_dir']
 	cmd = 'zsteg -a %s > %s'%(config['path'],path1)
-	Execmd(cmd)	
-
+	Execmd(cmd)
 	Filter(path1)
-
-	content = open(path1,'r').read() if path.exists(path1) else ""	
 	result_path = '/%s/zsteg.txt'%(config['hash']) if path.exists(path1) else ""
-	return {"type":"file","path":result_path,"content":content}
+	return {"type":"file","path":result_path,"content":""}

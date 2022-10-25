@@ -28,17 +28,17 @@ def scan(config):
 	Execmd(cmd1)
 	Execmd(cmd2)
 	Execmd(cmd3)
-
-	result_path = [
-		'/%s/StegoPVD_bruteforce.raw'%(config['hash']),
-		'/%s/StegoPVD_extract.raw'%(config['hash']),
-		'/%s/StegoPVD_extract_zigzag.raw'%(config['hash'])
-	]
-
-	config = [
-		open(path1,'r').read(),
-		open(path2,'r').read(),
-		open(path3,'r').read(),
-	]
 	
+	result_path = []
+
+	cpl = [
+		('/%s/StegoPVD_bruteforce.raw'%(config['hash']),open(path1,'rb').read()),
+		('/%s/StegoPVD_extract.raw'%(config['hash']),open(path2,'rb').read()),
+		('/%s/StegoPVD_extract_zigzag.raw'%(config['hash']),open(path3,'rb').read())
+	]
+
+	for c in cpl:
+		if c[1] != b'':
+			result_path.append(c[0])
+
 	return {"type":"file","path":result_path,"content":""}

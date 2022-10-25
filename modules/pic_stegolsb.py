@@ -20,19 +20,21 @@ def scan(config):
 	path1 		 = '%s/StegoLSB_bruteforce.raw'%config['env_dir']
 	path2 		 = '%s/StegoLSB_extract.raw'%config['env_dir']
 
-	cmd1 = 'stegolsb bruteforce  %s 2> %s'%(config['path'],path2)
-	cmd2 = 'stegolsb -v extract %s --column-step 2 --rows 1 --columns 128 2> %s'%(config['path'],path1)
+	cmd1 = 'stegolsb bruteforce  %s 2> %s'%(config['path'],path1)
+	cmd2 = 'stegolsb -v extract %s --column-step 2 --rows 1 --columns 128 2> %s'%(config['path'],path2)
 
 	Execmd(cmd1)
 	Execmd(cmd2)
 
-	result_path = [
-		'/%s/StegoLSB_bruteforce.raw'%(config['hash']),
-		'/%s/StegoLSB_extract.raw'%(config['hash']),
+	result_path = []
+
+	cpl = [
+		('/%s/StegoLSB_bruteforce.raw'%(config['hash']),open(path1,'rb').read()),
+		('/%s/StegoLSB_extract.raw'%(config['hash']),open(path2,'rb').read())
 	]
 
-	config  	= [
-		open(path1,'r').read(),
-		open(path2,'r').read()
-	]
-	return {"type":"file","path":result_path,"content":config}
+	for c in cpl:
+		if c[1] != b'':
+			result_path.append(c[0])
+	
+	return {"type":"file","path":result_path,"content":""}

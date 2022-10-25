@@ -52,7 +52,7 @@ function send_files() {
     fd.append('password',pass)
     fd.append('fflag',fflag)
 
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');    
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     for (let file of fileList) {
         fd.append('files', file);
     }
