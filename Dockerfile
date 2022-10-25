@@ -17,10 +17,10 @@ COPY ${ZIPFILE} /tmp/${ZIPFILE}
 RUN \
 	# APT ;\
 	apt-get -y -qq update; \
-	apt-get -y -qq --no-cache upgrade; \
+	apt-get -y -qq upgrade; \
 
 	# INIT INSTALL ;\
-	apt-get -y -qq install --no-install-recommends --yes \
+	apt-get -y -qq install  --yes \
 	python3 python3-pip	python3-dev bash sudo nano unzip zip curl git wget file xxd tshark default-jdk \
 	binutils binwalk openssl 2to3 sox cargo rubygems pdfcrack stegsnow outguess strace ltrace checksec \
 	ssldump exiftool pngcheck ;\
@@ -49,7 +49,7 @@ RUN \
 	wget https://github.com/praetorian-inc/Hob0Rules/raw/master/wordlists/rockyou.txt.gz -O /tmp/rockyou.txt.gz ;\
 	gzip -d /tmp/rockyou.txt.gz ;\
 	mkdir -p /usr/share/wordlists/ ;\
-	mv rockyou.txt /usr/share/wordlists/rockyou.txt ;\
+	mv /tmp/rockyou.txt /usr/share/wordlists/rockyou.txt ;\
 
 	# dtmf ;\
 	git clone https://github.com/ribt/dtmf-decoder.git dtmf ;\
@@ -60,7 +60,6 @@ RUN \
 	# hideme ;\
 	mv /var/www/${DOMAIN}/modules/resources/hideme /usr/bin/hideme ;\
 	chmod +x /usr/bin/hideme ;\
-	rm  /var/www/${DOMAIN}/modules/resources/hideme;\
 
 	# pdf-parser ;\
 	wget https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/pdf-parser.py -O /usr/bin/pdf-parser ;\
@@ -112,12 +111,12 @@ RUN \
 	
 	# stegopit ;\
 	wget https://gist.githubusercontent.com/dhondta/30abb35bb8ee86109d17437b11a1477a/raw/stegopit.py -O /usr/bin/stegopit ;\
-	chmod +x /usr/bin/stegopit ;\
+	chmod +x /usr/bin/stegopit ;
 
 	# CLEAN ;\
-	apt-get autoremove -y ;\
-	apt-get clean ;\
-	rm -rf /var/lib/apt/lists/* ;
+	# apt-get autoremove -y ;\
+	# apt-get clean ;\
+	# rm -rf /var/lib/apt/lists/* ;
 #======================================================
 
 

@@ -4,7 +4,8 @@
 # CTFiles Scan Project 
 
 from utils.utils_func import Execmd
-from os import path
+from os import path,mkdir,rmdir
+
 
 def help():
 	config = {
@@ -23,10 +24,10 @@ def scan(config):
 
 	dir_img = '%s/stegexp'%config['env_dir']
 
-	os.mkdir(dir_img)
+	mkdir(dir_img)
 	cmd  = 'StegExpose %s default 0.25 %s/stegexp.csv'%(dir_img,config['env_dir'])
 	Execmd(cmd)
-	os.rmdir(dir_img)
+	rmdir(dir_img)
 
 	files = ''
 	if path.exists('%s/stegexp.csv'%config['env_dir']):

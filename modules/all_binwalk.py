@@ -19,7 +19,7 @@ def scan(config):
 	cmd 		+= 'zip -q -r %s/binwalk.zip %s ;'%(config['env_dir'],path_save)
 	cmd 		+= 'rm -r %s;'%(path_save)
 
-	res = Execmd(cmd)
+	res = Execmd(cmd).decode()
 	
 	result_path = []
 	for file in [path1,path_save]:

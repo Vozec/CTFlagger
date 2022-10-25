@@ -41,4 +41,4 @@ def scan(config):
 		open(path3,'r').read(),
 	]
 	
-	return {"type":"file","path":result_path,"content":content}
+	return {"type":"file","path":result_path,"content":""}
