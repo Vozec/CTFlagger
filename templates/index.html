@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel = "icon" type = "image/png" href = "{{ url_for('static', filename='assets/icon_title.ico') }}">
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+	<!-- Custom styles for this template -->
+	<style>
+		/*
+		body {
+			width: 100%;
+			height: 100%;
+			font-family: "Segoe UI", sans-serif;
+		}*/
+		body {
+		  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+		  scrollbar-width: none; /* for Firefox */
+		  overflow-y: scroll; 
+		}
+
+		body::-webkit-scrollbar {
+		  display: none; /* for Chrome, Safari, and Opera */
+		}
+
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:"Segoe UI", sans-serif;
+			font-display: auto;
+			font-size: 1rem;
+			line-height: 1.54;
+			text-rendering: optimizeLegibility;
+			-webkit-font-smoothing: antialiased;
+			font-feature-settings: "liga", "tnum", "case", "calt", "zero", "ss01", "locl";
+			-webkit-overflow-scrolling: touch;
+			-webkit-text-size-adjust: 100%;
+			display: flex;
+			min-height: 100vh;
+			flex-direction: column;
+			background-color: #fff;
+			color: #222;
+			overflow-x: hidden;
+			overflow-y: scroll;
+		}
+
+		.bg-dark-custom{
+			background-color: #232425;
+		}
+
+		.bg-dark-custom2{
+			background-color: #1b1c1d;
+		}
+
+		.bg-purple{
+			/*background-color: #412860;*/
+			background-color: 2c1a41;
+		}
+
+		.btn-green {
+			color: #fff;
+			background-color: #078554;
+			border-color: #005537;
+
+		}
+
+		.border-green{
+			border: solid;
+			border-color: #005537;
+			border-radius: 0.3rem;
+		}
+
+		.border-black{
+			border: solid;
+			border-color: #ffffff;
+			border-radius: 0.3rem;
+			border-width: 0.1rem;
+		}
+
+		.custom_label {
+			background-color: #078554;
+			color: white;
+			padding: 0.5rem;
+			border-radius: 0.3rem;
+			cursor: pointer;
+			margin: 1rem;
+		}
+
+
+	</style>
+
+
+	<title>CTFileScan</title>
+</head>
+
+<body class="text-center bg-dark-custom text-white">
+
+	<header class="bg-dark-custom2 py-4 " style="color: #a9a9b3;" >
+		<h3 class="col-6">$> /cd CT'FileScan</h3>
+	</header>
+
+	<div class="container-fluid">
+
+		<main class="row d-flex p-5 flex-column flex-wrap">
+			
+			<div class="row">
+				<h1 class="h1 my-4 fw-normal">CTF Files Analysis</h1>
+			</div>
+
+
+			<div class="row  justify-content-center">
+				<div class=" col-xl-4 col-lg-8 col-md-10 col-12 px-md-5 px-2 py-3 rounded-3 ">
+
+					<div id="drop_area"> <!-- Drag&drop area -->
+
+						<div class="d-flex flex-column align-items-center bg-dark-custom border-green mb-5 py-4 drag-area overflow-hidden">						
+							<div class="col-4 ">
+								<img class="my-3 img-fluid rounded-3" src="{{ url_for('static', filename='assets/upload.svg') }}">
+							</div>
+							<header class="text-center text-muted" id="message_upload">Click Or Drag & Drop to Upload File</header>			
+							<input type="file" class="form-control" id="file-upload" multiple hidden>							
+							<label class="w-50 btn btn-lg btn-green my-3" for="file-upload">Select a file</label>
+						</div>
+
+					</div>
+
+					<div class="form-floating text-muted my-3 ">
+						<input type="text" class="form-control" id="PASSWORD" name="password" placeholder="Password">
+						<label for="floatingPassword">Password</label>
+						
+					</div>
+
+					<!-- <div class="form-floating text-muted my-3 ">
+						<input type="text" class="form-control" id="IV" name="iv" placeholder="Password">
+						<label for="floatingPassword">IV (Hex)</label>
+					</div> -->
+
+					<div class="form-floating text-muted my-3 ">
+						<input type="text" class="form-control" id="FFLAG" name="fflag" placeholder="Fflag">
+						<label for="floatingPassword">Format Flag</label>
+					</div>
+
+					<button class="w-100 btn btn-lg btn-green my-3 border-black" type="submit" id="submit_button" value="Submit" >Submit</button>
+
+				</div>
+				
+				</div>
+			</div>
+		</main>
+	</div>
+
+</body>
+
+<script type="text/javascript" color="7,136,85" pointColor="7,92,56" opacity='1' zIndex="-2" count="1000" src="{{ url_for('static', filename='assets/canvas-nest.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/canvas-nest.umd.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+</html>
