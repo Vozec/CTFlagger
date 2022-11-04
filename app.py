@@ -18,6 +18,7 @@ from utils.logger import *
 from utils.utils_func import *
 from utils.db_cmd import *
 from utils.analyse import Analyse
+from utils.render import Result_manager
 
 app = Flask(__name__)
 
@@ -75,11 +76,15 @@ def upload_file():
             
         password  = quote(request.form['password']) \
             if 'password' in request.form.keys() \
-            and quote(request.form['password']) != '\'\''\
+                and quote(request.form['password']) != '\'\''\
             else ''
 
-        format_flag = quote(request.form["fflag"]) if 'fflag' in request.form.keys() else 'flag{'
-        
+        format_flag = quote(request.form["fflag"]).replace('{','').replace('}','') \
+            if 'fflag' in request.form.keys() \
+                and quote(request.form['fflag']) != '\'\''\
+            else 'flag'
+
+
         file_cnt    = file.stream.read()
         ext         = quote(str(os.path.splitext(secure_filename(file.filename))[-1].lower().lstrip(".")))
         filename    = secure_filename(os.path.splitext(file.filename)[0].lower())
@@ -136,7 +141,7 @@ def result_file(hash):
                 return Error_handler('The file is being scanned, please wait a few seconds | Progress: %s'%progress,API,'Scan in progress ...')
             else:
                 result = Get_Result(DB_CLIENT,hash)
-                return ResultToJson(result) if API else Result_manager(result)           
+                return ResultToJson(result) if API else Result_manager(result,CONFIG)           
         else:
             return Error_handler('Invalid OR Expired ScanID',API)
     return redirect(url_for('index'))
@@ -165,9 +170,9 @@ def download(hash,filename):
 
 if __name__ == '__main__':
 
-    # DEBUG
-    if(exists('files.db')):
-        os.remove('files.db')
+    # # DEBUG
+    # if(exists('files.db')):
+    #     os.remove('files.db')
 
     Init()
     app.run(host='0.0.0.0',debug=True)

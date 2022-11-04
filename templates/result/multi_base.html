@@ -1,0 +1,17 @@
+<div class="col-md-8 col-12 rounded border-green my-2 py-2">
+	<div class="row p-2">
+		<div class="col-1">
+			<a class="btn  " data-toggle="collapse" href="#text-module-collapsed{{ id | safe}}" role="button" aria-expanded="false" aria-controls="text-module-collapsed{{ id | safe}}">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+					<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+				</svg>
+			</a>
+		</div>
+		<h3 class="col-2 m-auto">{{ module | safe }}</h3>
+		<p class="col-8 m-auto">{{ content | safe }}</p>
+		<div class="col-1"></div>
+	</div>
+	<div class="container-fluid collapse" id="text-module-collapsed{{ id | safe}}">
+		7e84437f35fa24b76c7898ca87f636d0
+	</div>
+</div>

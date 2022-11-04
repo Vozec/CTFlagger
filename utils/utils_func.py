@@ -5,6 +5,7 @@ import random
 import json
 import subprocess
 import time
+from datetime import datetime
 
 from os.path import exists
 from flask import Flask, render_template,jsonify
@@ -86,6 +87,7 @@ def Update_Progress(DB_CLIENT,hash_sha1,progress):
 	c.execute(CMD_update_progress,{'progress':progress,'hash':hash_sha1})
 	DB_CLIENT.commit()
 
+
 def ConvertResult(result):
 	config = {
 		'hash':result[0],
@@ -129,10 +131,13 @@ def Update_File(DB_CLIENT,hash_sha1,last_up,password):
 	c.execute(CMD_update_info,{'last_up':last_up,'upload_count':result['upload_count']+1,'all_password':str(list(all_password)),'hash':hash_sha1})
 	DB_CLIENT.commit()
 
-def Result_manager(result):
-	config = ConvertResult(result)
-	# ToDo : Finir le résultat en HTML
-	return render_template('result.html')
+def Update_Flags(DB_CLIENT,hash_sha1,flag):
+	c = DB_CLIENT.cursor()
+	result = ConvertResult(c.execute(CMD_get_by_hash,{'hash':hash_sha1}).fetchone())
+	all_flags = set(Save_Eval(result['flag']))
+	if(flag):[all_flags.add(_) for _ in flag]
+	c.execute(CMD_update_flag,{'flag':str(list(all_flags)),'hash':hash_sha1})
+	DB_CLIENT.commit()
 
 def Pcapng_to_pcap(filename):
 	new_name = filename.split('.pcapng')[0]+'.pcap'
@@ -207,3 +212,6 @@ def find(name, path):
 		if name in files:
 			return root,name
 	return "",""
+
+def Timestamp2date(timestamp):
+	return str(datetime.fromtimestamp(timestamp))

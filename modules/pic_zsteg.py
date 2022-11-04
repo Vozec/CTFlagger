@@ -13,23 +13,22 @@ def help():
 	}
 	return config
 
-def Filter(filename):
-	if path.exists(filename):
-		cnt = open(filename,'r').read().split('\n')
-		final = ''
-		for element in cnt:
-			if(not element.endswith('.. ') and not element == ''):
-				final += element.strip() + '\n'
-		f = open(filename,'w')
-		f.write(final)
-		f.close()
+def Filter(data,filename):
+	cnt = data.split('\n')
+	final = ''
+	for element in cnt:
+		if(not element.endswith('.. ') and not element == ''):
+			final += element.strip() + '\n'
+	f = open(filename,'w')
+	f.write(final)
+	f.close()
 	return final
 
 def scan(config):
 	config_current = help()
 	path1 = '%s/zsteg.txt'%config['env_dir']
-	cmd = 'zsteg -a %s > %s'%(config['path'],path1)
-	Execmd(cmd)
-	Filter(path1)
-	result_path = '/%s/zsteg.txt'%(config['hash']) if path.exists(path1) else ""
+	cmd = 'zsteg -a %s | tee -a %s'%(config['path'],path1)
+	data = Execmd(cmd).decode()
+	Filter(data,path1)
+	result_path = '/%s/zsteg.txt'%(config['hash'])
 	return {"type":"file","path":result_path,"content":""}

@@ -5,7 +5,7 @@ import r2pipe
 
 def help():
 	config = {
-		'type':{'binary':['.bin','.so']},
+		'type':{'binary':['.bin','.so','.exe']},
 		'name':'Radare2'
 	}
 	return config

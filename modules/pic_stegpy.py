@@ -19,10 +19,9 @@ def scan(config):
 
 	path1 = '%s/stegpy.txt'%config['env_dir']
 
-	cmd = 'stegpy %s > %s'%(config['path'],path1)
-	Execmd(cmd)
+	cmd = 'stegpy %s | tee -a %s'%(config['path'],path1)
+	content = Execmd(cmd).decode()
 
-	content = open(path1,'r').read() if path.exists(path1) else ""	
 	result_path = '/%s/stegpy.txt'%(config['hash']) if path.exists(path1) else ""
 
 	return {"type":"file","path":result_path,"content":content}

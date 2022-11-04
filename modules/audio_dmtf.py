@@ -9,6 +9,10 @@ def help():
 	}
 	return config
 
+def Save(data,filename):
+	f = open(filename,'wb')
+	f.write(data)
+	f.close()
 
 def scan(config):
 	config_current = help()
@@ -19,10 +23,9 @@ def scan(config):
 	
 	res = Execmd(cmd).decode()
 
+	result_path = ''
 	if(res != ""):
-		f = open(path1,'w')
-		f.write(res)
-		f.close()
+		Save(res,path1)
+		result_path = '/%s/Dmtf.txt'%config['hash']
 	
-	result_path = '/%s/Dmtf.txt'%config['hash'] if path.exists(path1) else ""	
 	return {"type":"file","path":result_path,"content":res}

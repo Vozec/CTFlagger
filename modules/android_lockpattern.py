@@ -1,9 +1,11 @@
 from utils.utils_func import Execmd
+
 from os import path
 import hashlib
 import multiprocessing
 import itertools
 import binascii
+
 # Adapted from https://github.com/sch3m4/androidpatternlock
 
 def help():
@@ -60,15 +62,36 @@ def Crack_pattern(target_hash):
             break
     return ret
 
+def Save(data,filename):
+        f = open(filename,'wb')
+        f.write(data)
+        f.close()
+
 def scan(config):
 	config_current = help()
 
 	path1 	= '%s/AndroidLockPattern.txt'%config['env_dir']
 	res1 	= ''
+    result_path = ''
 	pattern = Load_pattern(config['path'])
 	if(Check_Lenght(pattern)):
 		cracked = Crack_pattern(pattern)
 		if(cracked != None):
-			res1 = '[+]Android Pattern Cracked : %s\n\n[+] Gesture:\n  -----  -----  -----\n  | 3 |  | 2 |  | 1 |\n  -----  -----  -----\n  -----  -----  -----\n  | 4 |  | 5 |  | 6 |\n  -----  -----  -----\n  -----  -----  -----\n  | 9 |  | 8 |  | 7 |\n  -----  -----  -----'%cracked
-	
-	return {"type":"file","path":"","content":res1}
+			res1 = ('''
+[+]Android Pattern Cracked : %s
+
+[+] Gesture:
+  -----  -----  -----
+  | 3 |  | 2 |  | 1 |
+  -----  -----  -----
+  -----  -----  -----
+  | 4 |  | 5 |  | 6 |
+  -----  -----  -----
+  -----  -----  -----
+  | 9 |  | 8 |  | 7 |
+  -----  -----  -----
+'''%cracked)[1:-1]
+            Save(res1,path1)
+            result_path = '/%s/AndroidLockPattern-midi.txt'%config['hash']
+	   
+	return {"type":"file","path":result_path,"content":res1}

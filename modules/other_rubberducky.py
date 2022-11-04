@@ -23,8 +23,8 @@ def scan(config):
 		f.close()
 
 
-	result_path = []
+	result_path = ''
 	if(path.exists(path1)):
-		result_path.append('/%s/%s'%(config['hash'],path1.split('/')[-1]))
+		result_path = '/%s/%s'%(config['hash'],path1.split('/')[-1])
 			
 	return {"type":"file","path":result_path,"content":res1}

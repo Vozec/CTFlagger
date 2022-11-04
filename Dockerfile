@@ -23,7 +23,7 @@ RUN \
 	apt-get -y -qq install  --yes \
 	python3 python3-pip	python3-dev bash sudo nano unzip zip curl git wget file xxd tshark default-jdk \
 	binutils binwalk openssl 2to3 sox cargo rubygems pdfcrack stegsnow outguess strace ltrace checksec \
-	ssldump exiftool pngcheck ;\
+	ssldump exiftool pngcheck john ffmpeg;\
 
 	# WEBSERVER FILES ;\ 
 	rm -rf /var/www/html/; \
@@ -111,7 +111,12 @@ RUN \
 	
 	# stegopit ;\
 	wget https://gist.githubusercontent.com/dhondta/30abb35bb8ee86109d17437b11a1477a/raw/stegopit.py -O /usr/bin/stegopit ;\
-	chmod +x /usr/bin/stegopit ;
+	chmod +x /usr/bin/stegopit ;\
+
+	# openstego ;\
+	wget https://github.com/syvaidya/openstego/releases/download/openstego-0.8.5/openstego_0.8.5-1_all.deb -O /tmp/openstego.deb ;\
+	apt install /tmp/openstego.deb ;\
+	rm /tmp/openstego.deb ;
 
 	# CLEAN ;\
 	# apt-get autoremove -y ;\

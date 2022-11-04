@@ -19,11 +19,9 @@ def scan(config):
 
 	path1 = '%s/exiftool.txt'%config['env_dir']
 
-	cmd = 'exiftool -E -a -u -g1 %s > %s'%(config['path'],path1)
+	cmd = 'exiftool -E -a -u -g1 %s | tee -a %s'%(config['path'],path1)
 
-	Execmd(cmd)
-	
+	content = Execmd(cmd).decode()	
 	result_path = '/%s/exiftool.txt'%(config['hash']) if path.exists(path1) else ''
 
-	content 	= open(path1,'r').read() if path.exists(path1) else ''
 	return {"type":"file","path":result_path,"content":content}

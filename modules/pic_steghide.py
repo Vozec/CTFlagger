@@ -38,4 +38,7 @@ def scan(config):
 		result_path.append('/%s/Steghide_password.raw'%(config['hash']))
 		content.append(open(path2,'r').read())
 
+	result_path = result_path if len(result_path) > 1 else result_path[0]
+	content = content if len(content) > 1 else content[0]
+
 	return {"type":"file","path":result_path,"content":content}

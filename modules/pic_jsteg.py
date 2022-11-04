@@ -18,10 +18,9 @@ def scan(config):
 	config_current = help()
 	path1 = '%s/jsteg.txt'%config['env_dir']
 
-	cmd = 'jsteg reveal %s > %s'%(config['path'],path1)
-	Execmd(cmd)
+	cmd = 'jsteg reveal %s | tee -a %s'%(config['path'],path1)
 	
-	content = open(path1,'r').read() if path.exists(path1) else ""	
+	content = Execmd(cmd).decode()	
 	result_path = '/%s/jsteg.txt'%(config['hash']) if path.exists(path1) else ""
 
 	return {"type":"file","path":result_path,"content":content}

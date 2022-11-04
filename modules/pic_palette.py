@@ -61,16 +61,13 @@ def scan(config):
 		result_path = '/%s/palette_swap.zip'%config['hash']
 
 
-
-	result_direct_path = []
 	for key,value in images_name.items():
 		type_filter = {key:[]}
 		for img in value:
 			path_img = '%s/palette_swap/%s'%(config['env_dir'],img)
 			if path.exists(path_img):
 				type_filter[key].append('/%s/%s'%(config['hash'],img))
-		result_direct_path.append(type_filter)
 
 
-	return {"type":"file","path":result_path,"direct_path":result_direct_path,"content":"Module inspired from Aperisolve (Credit: @Zeecka)"}
+	return {"type":"file","path":result_path,"content":"Module inspired from Aperisolve (Credit: @Zeecka)"}
 

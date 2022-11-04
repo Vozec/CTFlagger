@@ -16,8 +16,8 @@ def scan(config):
 	path2 		 = '%s/strace.txt'%config['env_dir']
 	path3 		 = '%s/checksec.txt'%config['env_dir']
 
-	cmd1 = 'timeout 10 echo "guess" | chmod +x %s ;ltrace %s guess2 2> %s'%(config['path'],config['path'],path1)
-	cmd2 = 'timeout 10 echo "guess" | chmod +x %s ;strace %s guess2 2> %s'%(config['path'],config['path'],path2)
+	cmd1 = 'timeout 10 echo "%s" | chmod +x %s ;ltrace %s guess2 2> %s'%('A'*200,config['path'],config['path'],path1)
+	cmd2 = 'timeout 10 echo "%s" | chmod +x %s ;strace %s guess2 2> %s'%('A'*200,config['path'],config['path'],path2)
 	cmd3 = 'checksec  %s 2> %s;cat %s'%(config['path'],path3,path3)
 
 	Execmd(cmd1)

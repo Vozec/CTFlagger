@@ -1,5 +1,7 @@
 from threading import Thread
 from time import sleep
+from glob import glob
+from re import findall
 
 from utils.logger import logger
 from utils.utils_func import *
@@ -59,6 +61,14 @@ class Scanner(Thread):
 			except Exception as ex:
 				print('[-] Error with "%s" module: %s'%(mod[1][1]['name'],ex))
 
+
+		flags_scan1 = Search_Flag_1(self.config['formatflag'],self.config['env_dir'])
+		flags_scan2 = Search_Flag_2(self.config['formatflag'],self.config['env_dir'])
+		flags = list(dict.fromkeys(flags_scan1 + flags_scan2))
+		Update_Flags(self.DB_CLIENT,self.hash,flags)
+
+		Generate_final_zip(self.config['env_dir'])
+
 		Update_Status(self.DB_CLIENT,self.hash,'end')
 		return 1
 
@@ -75,5 +85,28 @@ def Analyse(setup,info):
 	th = Scanner(config,data)
 	th.start()
 
-	
 	return True
+
+def Search_Flag_1(format_flag,env_dir):
+	all_flags = []
+	cmd = "grep -r -E '%s{(.*?)}' %s -i -h -o | sort -u"%(format_flag,env_dir)
+	result = Execmd(cmd)
+	if result is not None:
+		for f in result.decode().strip().split('\n'):
+			all_flags.append(f)
+	return all_flags
+
+
+def Search_Flag_2(format_flag,env_dir):
+	all_flags = []
+	for f in glob('%s/**/*.txt'%env_dir, recursive=True):
+		if not f.endswith('.zip'):
+			cmd = "echo 'y' | stringcheese --file=%s '%s{'"%(f,format_flag)
+			result = Execmd(cmd)
+			if not b'No match found' in result:				
+				found = findall('%s{(.*)}'%format_flag,result.decode())
+				all_flags += ['%s{%s}'%(format_flag,x) for x in found]
+	return all_flags
+
+def Generate_final_zip(path):
+	Execmd('zip -r %s/global_result.zip %s'%(path,path))

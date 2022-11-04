@@ -44,6 +44,5 @@ def scan(config):
 
 	if(path.exists('%s/output_stegseek.txt'%config['env_dir'])):
 		result_path.append('/%s/output_stegseek.txt'%(config['hash']),)
-		config.append(open('%s/output_stegseek.txt'%config['env_dir'],'r').read())
 
 	return {"type":"file","path":result_path,"content":content}

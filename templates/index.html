@@ -17,79 +17,7 @@
 			height: 100%;
 			font-family: "Segoe UI", sans-serif;
 		}*/
-		body {
-		  -ms-overflow-style: none; /* for Internet Explorer, Edge */
-		  scrollbar-width: none; /* for Firefox */
-		  overflow-y: scroll; 
-		}
-
-		body::-webkit-scrollbar {
-		  display: none; /* for Chrome, Safari, and Opera */
-		}
-
-		body {
-			margin: 0;
-			padding: 0;
-			font-family:"Segoe UI", sans-serif;
-			font-display: auto;
-			font-size: 1rem;
-			line-height: 1.54;
-			text-rendering: optimizeLegibility;
-			-webkit-font-smoothing: antialiased;
-			font-feature-settings: "liga", "tnum", "case", "calt", "zero", "ss01", "locl";
-			-webkit-overflow-scrolling: touch;
-			-webkit-text-size-adjust: 100%;
-			display: flex;
-			min-height: 100vh;
-			flex-direction: column;
-			background-color: #fff;
-			color: #222;
-			overflow-x: hidden;
-			overflow-y: scroll;
-		}
-
-		.bg-dark-custom{
-			background-color: #232425;
-		}
-
-		.bg-dark-custom2{
-			background-color: #1b1c1d;
-		}
-
-		.bg-purple{
-			/*background-color: #412860;*/
-			background-color: 2c1a41;
-		}
-
-		.btn-green {
-			color: #fff;
-			background-color: #078554;
-			border-color: #005537;
-
-		}
-
-		.border-green{
-			border: solid;
-			border-color: #005537;
-			border-radius: 0.3rem;
-		}
-
-		.border-black{
-			border: solid;
-			border-color: #ffffff;
-			border-radius: 0.3rem;
-			border-width: 0.1rem;
-		}
-
-		.custom_label {
-			background-color: #078554;
-			color: white;
-			padding: 0.5rem;
-			border-radius: 0.3rem;
-			cursor: pointer;
-			margin: 1rem;
-		}
-
+		
 
 	</style>
 
@@ -97,12 +25,40 @@
 	<title>CTFileScan</title>
 </head>
 
-<body class="text-center bg-dark-custom text-white">
+<body class="text-center bg-dark-custom text-white" style="position: relative;" size-sensor-id="1">
+ 	<header class="header">
+    	<span class="header__inner">
+        	<a href="https://flag-poisoning.fr/" style="text-decoration: none;">
+	    		<div class="logo">        
+	            	<span class="logo__mark">$</span>
+	            	<span class="logo__text">&gt; cd /FlagPoisoning</span>
+	           		<span class="logo__cursor" style="background-color:#03A062;animation-duration:3s;"></span>
+	            </div>
+	        </a>
 
-	<header class="bg-dark-custom2 py-4 " style="color: #a9a9b3;" >
-		<h3 class="col-6">$> /cd CT'FileScan</h3>
+	        <span class="header__right">            
+	                <nav class="menu">
+					    <ul class="menu__inner">
+					    	<li>
+					    		<a href="https://ctfilescan.flag-poisoning.fr">CTFileScan</a>
+					    	</li>
+					    	<li>
+					    		<a href="https://flag-poisoning.fr/team/">Team</a>
+					    	</li>
+					    	<li>
+					    		<a href="https://flag-poisoning.fr/writeup/">Writeup</a>
+					    	</li>
+					    </ul>
+					</nav>
+					<span class="menu-trigger">
+	                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+	                        <path d="M0 0h24v24H0z" fill="none"></path>
+	                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+	                    </svg>
+	                </span>
+	        </span>
+    	</span>
 	</header>
-
 	<div class="container-fluid">
 
 		<main class="row d-flex p-5 flex-column flex-wrap">

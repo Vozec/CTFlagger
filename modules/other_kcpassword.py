@@ -29,8 +29,8 @@ def scan(config):
 		f.write(data)
 		f.close()
 	
-	result_path = []
+	result_path = ''
 	if(path.exists(path1)):
-		result_path.append('/%s/%s'%(config['hash'],path1.split('/')[-1]))
+		result_path = '/%s/KcPassword_decoded.txt'%(config['hash'])
 		
 	return {"type":"file","path":result_path,"content":data}

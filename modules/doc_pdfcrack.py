@@ -22,8 +22,8 @@ def scan(config):
 	if('Document is password protected' in Execmd("exiftool %s"%config['path']).decode()):
 		res = Execmd('pdfcrack --wordlist=%s %s | tee -a %s'%(rockyou,config['path'],path1))
 
-	result_path = []	
+	result_path = ''
 	if(path.exists(path1)):
-		result_path.append('/%s/%s'%(config['hash'],path1.split('/')[-1]))
+		result_path = '/%s/%s'%(config['hash'],path1.split('/')[-1])
 
 	return {"type":"file","path":result_path,"content":res}

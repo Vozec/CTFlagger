@@ -32,3 +32,5 @@ CMD_update_status = "UPDATE files SET status = :status WHERE hash = :hash"
 CMD_update_result = "UPDATE files SET result = :result WHERE hash = :hash"
 
 CMD_update_progress = "UPDATE files SET progress = :progress WHERE hash = :hash"
+
+CMD_update_flag = "UPDATE files SET flag = :flag WHERE hash = :hash"
