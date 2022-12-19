@@ -30,7 +30,7 @@ def scan(config):
 	###############
 	if(all_ != []):
 		f = open(path1,'w')
-		f.write(str(all_))
+		f.write('\n'.join([str(_) for _ in all_]))
 		f.close()
 
 		###############

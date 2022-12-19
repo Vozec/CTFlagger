@@ -32,6 +32,8 @@ fi
 """[1:-1]%(config['path'],config['path'],path2,more)
 
 	res = [Execmd(c).decode().strip() for c in (cmd1,cmd2,cmd3)]
+	print(res)
+	exit()
 	
 	result_path = []
 	for file in [path1,path2,path3]:

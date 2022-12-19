@@ -1,14 +1,12 @@
 FROM ubuntu:latest
 
 #===== ENV ============================================
-ENV HTTP_PORT 80
-ENV HTTPS_PORT 443
-ENV DEBUG_PORT 5000
-
+ENV HTTPS_PORT 5000
 ENV ZIPFILE source.zip
-ENV DOMAIN localhost
+ENV DOMAIN ctfilescan
 ENV DOCUMENT_ROOT /var/www/${DOMAIN}
 ENV DEBIAN_FRONTEND=noninteractive
+
 #======================================================
 
 #===== FILES / USER / DEPS ============================
@@ -129,9 +127,7 @@ RUN \
 VOLUME ${DOCUMENT_ROOT}
 WORKDIR ${DOCUMENT_ROOT}
 
-EXPOSE ${HTTP_PORT}
 EXPOSE ${HTTPS_PORT}
-EXPOSE ${DEBUG_PORT}
 
 CMD ["/bin/bash"]
 #======================================================
@@ -139,4 +135,8 @@ CMD ["/bin/bash"]
 # ENTRYPOINT ${DOCUMENT_ROOT}/start.sh && /bin/bash
 # CMD ["sleep", "infinity"]
 
-# docker build -t ctfweb . ;docker run --rm -it --entrypoint bash -p 5000:5000 ctfweb
+# docker build -t ctfweb . ;docker run --rm -it --entrypoint bash -p 8080:80 ctfweb
+
+# netstat -tulpn | grep ':5000'
+# iptables -I INPUT -p tcp --dport 5000 -j ACCEPT
+# app.run(host='0.0.0.0') // dans le fichier .py

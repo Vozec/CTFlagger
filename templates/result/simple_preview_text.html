@@ -1,4 +1,4 @@
-<div class="col-md-8 col-12 rounded border-green my-2 py-2">
+<div class="col-md-8 col-12 rounded bg-dark-custom border-green my-2 py-2">
 	<div class="row p-2">
 		<div class="col-1"></div>
 		<h3 class="col-2 m-auto">{{ module | safe }}</h3>
@@ -18,10 +18,10 @@
 			</button>
 		</form>
 	</div>
-	<div class="row p-2 collapse" id="text-result-collapsed-{{ id | safe }}" >
+	<div class="row p-2 collapse"   id="text-result-collapsed-{{ id | safe }}" >
 		<div class="col-1"></div>
 		<div class="card card-body bg-transparent large-2 border">
-			<p class="col-10 m-auto"  >{{ preview | safe }}</p>
+			<pre class="col-10 m-auto" >{{ preview | safe }}</pre>
 		</div>
 		<div class="col-1"></div>
 	</div>

@@ -29,6 +29,6 @@ def scan(config):
 	path1 = '%s/zsteg.txt'%config['env_dir']
 	cmd = 'zsteg -a %s | tee -a %s'%(config['path'],path1)
 	data = Execmd(cmd).decode()
-	Filter(data,path1)
+	final = Filter(data,path1)
 	result_path = '/%s/zsteg.txt'%(config['hash'])
-	return {"type":"file","path":result_path,"content":""}
+	return {"type":"file","path":result_path,"content":final}

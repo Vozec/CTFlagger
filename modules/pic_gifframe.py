@@ -21,8 +21,8 @@ def help():
 def scan(config):
 	config_current = help()
 
-	path1	  = '%s/gifframe.zip'%config['env_dir']
-	path2	  = '%s/gif_timing.txt'%config['env_dir']
+	path1	  = '%s/frame_all.zip'%config['env_dir']
+	path2	  = '%s/frame_timing.txt'%config['env_dir']
 	path_work = '%s/gifpng'%config['env_dir']
 	result_path,content = [],""
 
@@ -46,9 +46,9 @@ def scan(config):
 	Execmd(cmd)		
 	
 	if path.exists(path1):
-		result_path.append('/%s/gifframe.zip'%(config['hash']))
+		result_path.append('/%s/frame_all.zip'%(config['hash']))
 	if path.exists(path2):
-		result_path.append('/%s/gif_timing.txt'%(config['hash']))
+		result_path.append('/%s/frame_timing.txt'%(config['hash']))
 		content = data
 
 	return {"type":"file","path":result_path,"content":content}

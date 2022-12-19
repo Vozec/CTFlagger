@@ -5,7 +5,7 @@ Flask==2.0.3
 librosa==0.9.2
 matplotlib==3.5.2
 numpy==1.21.5
-oletools==0z.60.1
+oletools
 opencv_python==4.6.0.66
 Pillow==9.2.0
 pwnlib==1.2.1

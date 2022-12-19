@@ -23,56 +23,56 @@ FOUND = multiprocessing.Event()
 
 def Load_pattern(path):
 	return binascii.hexlify(open(path, 'rb').read(hashlib.sha1().digest_size)).decode()
-   	
+	
 def Check_Lenght(gest):
 	return False if (len(gest) / 2 != hashlib.sha1().digest_size) else True
 
 def lookup(param):
-    global FOUND
-    lenhash = param[0]
-    target = param[1]
-    positions = param[2]
-    if FOUND.is_set() is True:
-        return None
-    perms = itertools.permutations(positions, lenhash)
-    for item in perms:
-        if FOUND.is_set() is True:
-            return None
-        pattern = ''.join(str(v) for v in item)
-        key = binascii.unhexlify(''.join('%02x' % (ord(c) - ord('0')) for c in pattern))
-        sha1 = hashlib.sha1(key).hexdigest()
-        if sha1 == target:
-            FOUND.set()
-            return pattern
-    return None
+	global FOUND
+	lenhash = param[0]
+	target = param[1]
+	positions = param[2]
+	if FOUND.is_set() is True:
+		return None
+	perms = itertools.permutations(positions, lenhash)
+	for item in perms:
+		if FOUND.is_set() is True:
+			return None
+		pattern = ''.join(str(v) for v in item)
+		key = binascii.unhexlify(''.join('%02x' % (ord(c) - ord('0')) for c in pattern))
+		sha1 = hashlib.sha1(key).hexdigest()
+		if sha1 == target:
+			FOUND.set()
+			return pattern
+	return None
 
 def Crack_pattern(target_hash):
-    ncores = multiprocessing.cpu_count()
-    pool = multiprocessing.Pool(ncores)
-    positions = [i for i in range(MAX_LEN)]    
-    generate_worker_params = lambda x: [x, target_hash, positions]
-    params = [generate_worker_params(i) for i in range(MIN_POSITIONS_NUMBER, MAX_LEN + 1)]    
-    result = pool.map(lookup,params)
-    pool.close()
-    pool.join()    
-    ret = None
-    for r in result:
-        if r is not None:
-            ret = r
-            break
-    return ret
+	ncores = multiprocessing.cpu_count()
+	pool = multiprocessing.Pool(ncores)
+	positions = [i for i in range(MAX_LEN)] 
+	generate_worker_params = lambda x: [x, target_hash, positions]
+	params = [generate_worker_params(i) for i in range(MIN_POSITIONS_NUMBER, MAX_LEN + 1)]  
+	result = pool.map(lookup,params)
+	pool.close()
+	pool.join() 
+	ret = None
+	for r in result:
+		if r is not None:
+			ret = r
+			break
+	return ret
 
 def Save(data,filename):
-        f = open(filename,'wb')
-        f.write(data)
-        f.close()
+		f = open(filename,'wb')
+		f.write(data)
+		f.close()
 
 def scan(config):
 	config_current = help()
 
 	path1 	= '%s/AndroidLockPattern.txt'%config['env_dir']
 	res1 	= ''
-    result_path = ''
+	result_path = ''
 	pattern = Load_pattern(config['path'])
 	if(Check_Lenght(pattern)):
 		cracked = Crack_pattern(pattern)
@@ -91,7 +91,7 @@ def scan(config):
   | 9 |  | 8 |  | 7 |
   -----  -----  -----
 '''%cracked)[1:-1]
-            Save(res1,path1)
-            result_path = '/%s/AndroidLockPattern-midi.txt'%config['hash']
+			Save(res1,path1)
+			result_path = '/%s/AndroidLockPattern-midi.txt'%config['hash']
 	   
 	return {"type":"file","path":result_path,"content":res1}

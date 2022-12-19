@@ -33,4 +33,4 @@ def scan(config):
 	if path.exists('%s/stegexp.csv'%config['env_dir']):
 		files = '/%s/stegexp.csv'%(config['hash'])
 
-	return {"type":"file","path":files,"content":content}
+	return {"type":"file","path":files,"content":""}

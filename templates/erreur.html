@@ -53,8 +53,14 @@
 		<div class="col-6 bg-dark-custom2 border-green p-4">
 			<h1 id='type' >{{ head  | safe }}</h1>
 			<hr class="featurette-divider">
-			<p>{{ msg  | safe }}</p>
-
+			<div class="row">
+				<p>
+					{{ msg  | safe }}					
+				</p>
+				<!-- <div class="spinner-border" role="status">
+					<span class="visually-hidden"></span>
+				</div> -->
+			</div>	
 		</div>
 	</div>
 </body>

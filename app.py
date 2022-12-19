@@ -13,6 +13,7 @@ import os
 import sqlite3
 import sys
 import time
+import shutil
 
 from utils.logger import *
 from utils.utils_func import *
@@ -169,10 +170,12 @@ def download(hash,filename):
 
 
 if __name__ == '__main__':
+    debug = False
 
-    # # DEBUG
-    # if(exists('files.db')):
-    #     os.remove('files.db')
+    # DEBUG
+    if(debug and exists('files.db')):
+        os.remove('files.db')
+        shutil.rmtree(CONFIG['dwnl_dir'])
 
     Init()
-    app.run(host='0.0.0.0',debug=True)
+    app.run(host='0.0.0.0',debug=debug,port=80)

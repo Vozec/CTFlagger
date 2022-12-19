@@ -1,12 +1,14 @@
 from flask import render_template
-from pwnlib.util.safeeval import expr as Save_Eval
+# from pwnlib.util.safeeval import expr as Save_Eval
 from os import path
+from random import choice
+import html
 
 from utils.utils_func import ConvertResult,Timestamp2date,Size,find
 
 def Result_manager(result,CONFIG):
 	config 	 = ConvertResult(result)
-	res_scan = Save_Eval(config['result'])
+	res_scan = eval(config['result'])
 	content  = Get_Content(res_scan,config,CONFIG)
 
 	return render_template('result.html',
@@ -23,18 +25,15 @@ def Result_manager(result,CONFIG):
 def Get_Content(results,config,CONFIG):
 	content = ''
 	models  = Load_all_model()
-	id_ = 0
 	for module,res in results.items():
 		if (type(res['path']) == str):
-			html,id_ = HTML_1(id_,models,module,res,config,CONFIG)	
-			content += html
+			content += HTML_1(models,module,res,config,CONFIG)	
 		else:
-			html,id_ = HTML_2(id_,models,module,res,config,CONFIG)	
-			content += html
+			content += HTML_2(models,module,res,config,CONFIG)	
 	return content
 
 
-def HTML_2(id_mod,models,module,res,config,CONFIG):
+def HTML_2(models,module,res,config,CONFIG):
 	def preview_possible(res):
 		txt = []
 		for x in res['path']:
@@ -44,7 +43,6 @@ def HTML_2(id_mod,models,module,res,config,CONFIG):
 					break
 		return len(txt) == len(res['content'])
 	content = ''
-	id_ 	= id_mod
 	preview_id = 0
 	preview_on = preview_possible(res)
 	for i in range(len(res['path'])):
@@ -53,47 +51,42 @@ def HTML_2(id_mod,models,module,res,config,CONFIG):
 			content += render_template(models['multi_nopreview'],
 				content='%s %s'%(Name(file),Get_size(file,config,CONFIG)),
 				link=file,
-				id = id_)
-			id_ += 1
+				id = Get_id())
 		else:
 			cnt = res['content'][preview_id] if preview_id < len(res['content']) else ''
 
 			template = models['multi_preview_text']
 			if isimage(file):
 				template = models['multi_preview_img']
-				id_ += 1
 			elif cnt != '':
 				template = models['multi_preview_text']
-				id_ += 1
 				preview_id += 1
 
 			content += render_template(template,
 					content='%s %s'%(Name(file),Get_size(file,config,CONFIG)),
 					link=file,
-					id = id_,
-					preview=cnt)
+					id = Get_id(),
+					preview=html.escape(cnt))
 
 	return render_template('result/multi_base.html',
 		module=module,
 		content='%s files'%len(res['path']),
-		id = id_mod,
-	).replace(r'7e84437f35fa24b76c7898ca87f636d0',content),id_
+		id = Get_id(),
+	).replace(r'7e84437f35fa24b76c7898ca87f636d0',content)
 
-def HTML_1(id_,models,module,res,config,CONFIG):
+def HTML_1(models,module,res,config,CONFIG):
 	template = models['simple_nopreview']
 	if isimage(res['path']):
 		template = models['simple_preview_img']
-		id_ += 1
 	elif res['content'] != '':
 		template = models['simple_preview_text']
-		id_ += 1
 
 	return render_template(template,
 			module=module,
 			content='%s %s'%(Name(res['path']),Get_size(res['path'],config,CONFIG)),
 			link=res['path'],
-			id = id_,
-			preview=res['content']), id_
+			id = Get_id(),
+			preview=html.escape(res['content']))
 
 def Load_all_model():
 	return {
@@ -104,6 +97,9 @@ def Load_all_model():
 		'multi_preview_img' : 'result/multi_preview_img.html',
 		'multi_preview_text' : 'result/multi_preview_text.html',
 	}
+
+def Get_id():
+	return ''.join([choice('012345789') for _ in range(64)])
 
 def isimage(file):
 	for x in ['png','jpeg','jpg','bmp','gif']:

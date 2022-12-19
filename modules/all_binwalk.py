@@ -22,7 +22,7 @@ def scan(config):
 	res = Execmd(cmd).decode()
 	
 	result_path = []
-	for file in [path1,path_save]:
+	for file in [path1,'%s/binwalk.zip'%config['env_dir']]:
 		if(path.exists(file)):
 			result_path.append('/%s/%s'%(config['hash'],file.split('/')[-1]))
 	
