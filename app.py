@@ -178,4 +178,9 @@ if __name__ == '__main__':
         shutil.rmtree(CONFIG['dwnl_dir'])
 
     Init()
-    app.run(host='0.0.0.0',debug=debug,port=80)
+
+    app.run(host='0.0.0.0',debug=debug,port=80,ssl_context='adhoc')
+
+# docker build -t ctfweb .
+# docker run --rm -it -p 8080:80 ctfweb
+# flask run --cert=adhoc -h 0.0.0.0 -p 80

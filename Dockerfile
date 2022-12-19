@@ -1,11 +1,13 @@
 FROM ubuntu:latest
 
 #===== ENV ============================================
-ENV HTTPS_PORT 5000
 ENV ZIPFILE source.zip
 ENV DOMAIN ctfilescan
 ENV DOCUMENT_ROOT /var/www/${DOMAIN}
 ENV DEBIAN_FRONTEND=noninteractive
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_ENV=development
 
 #======================================================
 
@@ -127,16 +129,8 @@ RUN \
 VOLUME ${DOCUMENT_ROOT}
 WORKDIR ${DOCUMENT_ROOT}
 
-EXPOSE ${HTTPS_PORT}
+EXPOSE 8080
+EXPOSE 80
 
-CMD ["/bin/bash"]
+CMD ["flask","run","--cert=adhoc","-h","0.0.0.0","-p","80"]
 #======================================================
-
-# ENTRYPOINT ${DOCUMENT_ROOT}/start.sh && /bin/bash
-# CMD ["sleep", "infinity"]
-
-# docker build -t ctfweb . ;docker run --rm -it --entrypoint bash -p 8080:80 ctfweb
-
-# netstat -tulpn | grep ':5000'
-# iptables -I INPUT -p tcp --dport 5000 -j ACCEPT
-# app.run(host='0.0.0.0') // dans le fichier .py
