@@ -18,9 +18,9 @@ The Website is available on your local machine on port *8080*
 ![Alt Text](./img/result.png)
 
 ## Api mod : 
-"""bash
+```bash
 Invoke-WebRequest -Uri https://localhost:8080/52062f33b7a58050c082a5f677a1ae626da32d88 -Method Get -Headers @{Api="True"} -UseBasicParsing  | Select-Object -Expand Content | .\jq.exe
-"""
+```
 ![Alt Text](./img/json.png)
 
 
@@ -90,3 +90,4 @@ Invoke-WebRequest -Uri https://localhost:8080/52062f33b7a58050c082a5f677a1ae626d
   - Rdpcap data & unhexlified data / UDP data
   - Urlsnarf
   
+*Feel free to contribute to the project by adding different modules or suggesting future improvements*
