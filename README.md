@@ -17,7 +17,7 @@ The Website is available on your local machine on port *8080*
 ## Result:
 ![Alt Text](./img/result.png)
 
-## Api mod : 
+## Api Endpoint to retrieve results : 
 ```bash
 Invoke-WebRequest -Uri https://localhost:8080/52062f33b7a58050c082a5f677a1ae626da32d88 -Method Get -Headers @{Api="True"} -UseBasicParsing  | Select-Object -Expand Content | .\jq.exe
 ```
