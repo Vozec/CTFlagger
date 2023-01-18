@@ -12,6 +12,17 @@ The Website is available on your local machine on port *8080*
 
 ## Home :
 ![Alt Text](./img/home.png)
+![Alt Text](./img/wait.png)
+
+## Result:
+![Alt Text](./img/result.png)
+
+## Api mod : 
+"""bash
+Invoke-WebRequest -Uri https://localhost:8080/52062f33b7a58050c082a5f677a1ae626da32d88 -Method Get -Headers @{Api="True"} -UseBasicParsing  | Select-Object -Expand Content | .\jq.exe
+"""
+![Alt Text](./img/json.png)
+
 
 ## Features :
 
