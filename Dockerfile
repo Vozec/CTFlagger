@@ -132,5 +132,6 @@ WORKDIR ${DOCUMENT_ROOT}
 EXPOSE 8080
 EXPOSE 80
 
-CMD ["flask","run","--cert=adhoc","-h","0.0.0.0","-p","80"]
+CMD ["python3","app.py"]
+#CMD ["flask","run","--cert=adhoc","-h","0.0.0.0","-p","80"]
 #======================================================
