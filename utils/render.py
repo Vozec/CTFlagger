@@ -1,14 +1,14 @@
 from flask import render_template
-# from pwnlib.util.safeeval import expr as Save_Eval
 from os import path
 from random import choice
 import html
+import json
 
 from utils.utils_func import ConvertResult,Timestamp2date,Size,find
 
 def Result_manager(result,CONFIG):
 	config 	 = ConvertResult(result)
-	res_scan = eval(config['result'])
+	res_scan = json.loads(config['result'])
 	content  = Get_Content(res_scan,config,CONFIG)
 
 	return render_template('result.html',
