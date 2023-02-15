@@ -26,6 +26,8 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGHT'] = 16777216
 app.static_folder = 'static'
 
+os.chdir(os.path.dirname(__file__))
+
 CONFIG = {
     'dwnl_dir':'/tmp/CTfilesScan',
     'report':'/tmp/CTfilesScan/error.log',
@@ -44,6 +46,8 @@ ext_word  = [{
         }
     ]
 
+
+os.chdir(os.environ['DOCUMENT_ROOT'])
 
 def Init():
     global modules , ext_word
