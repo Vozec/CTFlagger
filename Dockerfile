@@ -20,7 +20,7 @@ RUN \
 
 	# INIT INSTALL ;\
 	apt-get -y -qq install  --yes \
-	python3 python3-pip	python3-dev bash sudo nano unzip zip curl git wget file xxd tshark default-jdk \
+	python3 python3-pip	python3-dev bash cron sudo nano unzip zip curl git wget file xxd tshark default-jdk \
 	binutils binwalk openssl 2to3 sox cargo rubygems pdfcrack stegsnow outguess strace ltrace checksec \
 	ssldump exiftool pngcheck john ffmpeg;\
 
@@ -33,8 +33,14 @@ RUN \
     # USERS ;\ 
     useradd -m -s /bin/bash server; \
     echo "server:server" | chpasswd; \
-    echo "root:Th1sIsTh3R0oTP@sswd123" | chpasswd; \
-	
+    echo "root:Th1sIsTh3R0oTP@sswd1234" | chpasswd; \
+	# echo "root:$(echo shuf -i 1000000-9999999 -n 1)" | chpasswd; \
+
+	# CRONTAB ;\
+	echo "@hourly server ${DOCUMENT_ROOT}/utils/auto-deletion.py" > /etc/cron.hourly/schedule ;\
+	chmod +x ${DOCUMENT_ROOT}/utils/auto-deletion.py ;\
+	chmod 600 /etc/cron.hourly/schedule ;\
+
 	# PYTHON DEPS ;\
 	sudo ln -s /usr/bin/python3 /usr/bin/python ;\
 	python3 -m pip install -r /var/www/${DOMAIN}/requirements.txt ;\
@@ -125,5 +131,5 @@ WORKDIR ${DOCUMENT_ROOT}
 EXPOSE 8080
 EXPOSE 80
 
-CMD ["python3","app.py"]
+CMD ["runuser","-l","server","-c","'","python3","/var/www/ctfilescan/app.py","'"]
 #======================================================
