@@ -29,7 +29,8 @@ RUN \
 	mkdir -p ${DOCUMENT_ROOT}; \
 	git clone https://github.com/Vozec/CTFileScan-WEB.git ${DOCUMENT_ROOT}; \
     	echo "cd ${DOCUMENT_ROOT}" >> /root/.bashrc; \
-
+	chmod +x ${DOCUMENT_ROOT}/start.sh ;\
+	
     	# USERS ;\ 
     	useradd -m -s /bin/bash server; \
     	echo "server:server" | chpasswd; \
@@ -130,5 +131,5 @@ WORKDIR ${DOCUMENT_ROOT}
 EXPOSE 8080
 EXPOSE 80
 
-CMD ["runuser -l server -c \"python3 ${DOCUMENT_ROOT}/app.py\""]
+CMD ["bash","start.sh"]
 #======================================================
