@@ -130,5 +130,5 @@ WORKDIR ${DOCUMENT_ROOT}
 EXPOSE 8080
 EXPOSE 80
 
-CMD ["sudo -u server bash -c \"python3 ${DOCUMENT_ROOT}/app.py\""]
+CMD ['sudo -u server bash -c "python3 ${DOCUMENT_ROOT}/app.py"']
 #======================================================
