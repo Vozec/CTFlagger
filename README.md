@@ -89,5 +89,13 @@ Invoke-WebRequest -Uri https://localhost:8080/52062f33b7a58050c082a5f677a1ae626d
   - Ssldump
   - Rdpcap data & unhexlified data / UDP data
   - Urlsnarf
-  
+ 
+# Usage Of SSL Certificat :
+You only have to edit this boolean in ``app.py``
+```python
+if __name__ == '__main__':
+    debug = False
+    ssl   = False
+```
+
 *Feel free to contribute to the project by adding different modules or suggesting future improvements*
