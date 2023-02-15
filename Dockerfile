@@ -28,14 +28,13 @@ RUN \
 	rm -rf /var/www/html/; \
 	mkdir -p ${DOCUMENT_ROOT}; \
 	git clone https://github.com/Vozec/CTFileScan-WEB.git ${DOCUMENT_ROOT}; \
-    echo "cd ${DOCUMENT_ROOT}" >> /root/.bashrc; \
+    	echo "cd ${DOCUMENT_ROOT}" >> /root/.bashrc; \
 
-    # USERS ;\ 
-    useradd -m -s /bin/bash server; \
-    echo "server:server" | chpasswd; \
-    echo "root:Th1sIsTh3R0oTP@sswd1234" | chpasswd; \
-	# echo "root:$(echo shuf -i 1000000-9999999 -n 1)" | chpasswd; \
-
+    	# USERS ;\ 
+    	useradd -m -s /bin/bash server; \
+    	echo "server:server" | chpasswd; \
+    	echo "root:${cat /dev/urandom | xxd -p | head -n1}" | chpasswd; \
+	
 	# CRONTAB ;\
 	echo "@hourly server ${DOCUMENT_ROOT}/utils/auto-deletion.py" > /etc/cron.hourly/schedule ;\
 	chmod +x ${DOCUMENT_ROOT}/utils/auto-deletion.py ;\
