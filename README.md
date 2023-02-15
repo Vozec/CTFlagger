@@ -11,17 +11,17 @@ docker run --rm -it -p 8080:80 ctfweb
 The Website is available on your local machine on port *8080*
 
 ## Home :
-![Alt Text](./img/home.png)
-![Alt Text](./img/wait.png)
+![Alt Text](./.github/home.png)
+![Alt Text](./.github/wait.png)
 
 ## Result:
-![Alt Text](./img/result.png)
+![Alt Text](./.github/result.png)
 
 ## Api Endpoint to retrieve results : 
 ```bash
 Invoke-WebRequest -Uri https://localhost:8080/52062f33b7a58050c082a5f677a1ae626da32d88 -Method Get -Headers @{Api="True"} -UseBasicParsing  | Select-Object -Expand Content | .\jq.exe
 ```
-![Alt Text](./img/json.png)
+![Alt Text](./.github/json.png)
 
 
 ## Features :
@@ -89,13 +89,5 @@ Invoke-WebRequest -Uri https://localhost:8080/52062f33b7a58050c082a5f677a1ae626d
   - Ssldump
   - Rdpcap data & unhexlified data / UDP data
   - Urlsnarf
- 
-# Usage Of SSL Certificat :
-You only have to edit this boolean in ``app.py``
-```python
-if __name__ == '__main__':
-    debug = False
-    ssl   = False
-```
-
+  
 *Feel free to contribute to the project by adding different modules or suggesting future improvements*
