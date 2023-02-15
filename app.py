@@ -46,9 +46,6 @@ ext_word  = [{
         }
     ]
 
-
-os.chdir(os.environ['DOCUMENT_ROOT'])
-
 def Init():
     global modules , ext_word
     if(not exists(CONFIG['dwnl_dir'])):os.makedirs(CONFIG['dwnl_dir'],exist_ok=True)
