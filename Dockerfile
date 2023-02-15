@@ -1,9 +1,9 @@
 FROM ubuntu:latest
 
 #===== ENV ============================================
-ENV ZIPFILE source.zip
 ENV DOMAIN ctfilescan
 ENV DOCUMENT_ROOT /var/www/${DOMAIN}
+
 ENV DEBIAN_FRONTEND=noninteractive
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
@@ -12,7 +12,6 @@ ENV FLASK_ENV=development
 #======================================================
 
 #===== FILES / USER / DEPS ============================
-COPY ${ZIPFILE} /tmp/${ZIPFILE}
 
 RUN \
 	# APT ;\
@@ -28,12 +27,10 @@ RUN \
 	# WEBSERVER FILES ;\ 
 	rm -rf /var/www/html/; \
 	mkdir -p ${DOCUMENT_ROOT}; \
-	mv /tmp/${ZIPFILE} ${DOCUMENT_ROOT}/${ZIPFILE}; \
-	unzip ${DOCUMENT_ROOT}/${ZIPFILE} -d /var/www/${DOMAIN}; \
+	git clone https://github.com/Vozec/CTFileScan-WEB.git ${DOCUMENT_ROOT}; \
     echo "cd ${DOCUMENT_ROOT}" >> /root/.bashrc; \
 
     # USERS ;\ 
-    rm ${DOCUMENT_ROOT}/${ZIPFILE}; \
     useradd -m -s /bin/bash server; \
     echo "server:server" | chpasswd; \
     echo "root:Th1sIsTh3R0oTP@sswd123" | chpasswd; \
@@ -118,10 +115,6 @@ RUN \
 	apt install /tmp/openstego.deb ;\
 	rm /tmp/openstego.deb ;
 
-	# CLEAN ;\
-	# apt-get autoremove -y ;\
-	# apt-get clean ;\
-	# rm -rf /var/lib/apt/lists/* ;
 #======================================================
 
 
