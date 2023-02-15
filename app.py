@@ -171,6 +171,7 @@ def download(hash,filename):
 
 if __name__ == '__main__':
     debug = False
+    ssl   = False
 
     # DEBUG
     if(debug and exists('files.db')):
@@ -179,8 +180,7 @@ if __name__ == '__main__':
 
     Init()
 
-    app.run(host='0.0.0.0',debug=debug,port=80,ssl_context='adhoc')
-
-# docker build -t ctfweb .
-# docker run --rm -it -p 8080:80 ctfweb
-# flask run --cert=adhoc -h 0.0.0.0 -p 80
+    if ssl:
+        app.run(host='0.0.0.0',debug=debug,port=80,ssl_context='adhoc')
+    else:
+        app.run(host='0.0.0.0',debug=debug,port=80)
