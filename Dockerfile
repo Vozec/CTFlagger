@@ -30,12 +30,14 @@ RUN \
 	git clone https://github.com/Vozec/CTFileScan-WEB.git ${DOCUMENT_ROOT}; \
     	echo "cd ${DOCUMENT_ROOT}" >> /root/.bashrc; \
 	chmod +x ${DOCUMENT_ROOT}/start.sh ;\
-	chown -R server ${DOCUMENT_ROOT} ;\
 	
     	# USERS ;\ 
     	useradd -m -s /bin/bash server; \
     	echo "server:server" | chpasswd; \
     	echo "root:${cat /dev/urandom | xxd -p | head -n1}" | chpasswd; \
+	
+	# CHOWN 
+	chown -R server ${DOCUMENT_ROOT} ;\
 	
 	# CRONTAB ;\
 	echo "@hourly server ${DOCUMENT_ROOT}/utils/auto-deletion.py" > /etc/cron.hourly/schedule ;\
