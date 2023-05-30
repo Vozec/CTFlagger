@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel = "icon" type = "image/png" href = "{{ url_for('static', filename='assets/icon_title.ico') }}">
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+	<!-- Custom styles for this template -->
+	<style>
+		/*
+		body {
+			width: 100%;
+			height: 100%;
+			font-family: "Segoe UI", sans-serif;
+		}*/
+		
+
+	</style>
+
+
+	<title>CTFlagger</title>
+</head>
+
+<body class="text-center bg-dark-custom text-white" style="position: relative;" size-sensor-id="1">
+ 	<header class="header">
+    	<span class="header__inner">
+        	<a href="https://flag-poisoning.fr/" style="text-decoration: none;">
+	    		<div class="logo">        
+	            	<span class="logo__mark">$</span>
+	            	<span class="logo__text">&gt; cd /FlagPoisoning</span>
+	           		<span class="logo__cursor" style="background-color:#03A062;animation-duration:3s;"></span>
+	            </div>
+	        </a>
+
+	        <span class="header__right">            
+	                <nav class="menu">
+					    <ul class="menu__inner">
+					    	<li>
+					    		<a href="https://ctflagger.flag-poisoning.fr">CTFlagger</a>
+					    	</li>
+					    	<li>
+					    		<a href="https://flag-poisoning.fr/team/">Team</a>
+					    	</li>
+					    	<li>
+					    		<a href="https://flag-poisoning.fr/writeup/">Writeup</a>
+					    	</li>
+					    </ul>
+					</nav>
+					<span class="menu-trigger">
+	                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+	                        <path d="M0 0h24v24H0z" fill="none"></path>
+	                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+	                    </svg>
+	                </span>
+	        </span>
+    	</span>
+	</header>
+	<div class="container-fluid">
+
+		<main class="row d-flex p-5 flex-column flex-wrap">
+			
+			<div class="row">
+				<h1 class="h1 my-4 fw-normal">CTF Files Analysis</h1>
+			</div>
+
+
+			<div class="row  justify-content-center">
+				<div class=" col-xl-4 col-lg-8 col-md-10 col-12 px-md-5 px-2 py-3 rounded-3 ">
+
+					<div id="drop_area">
+
+						<div class="d-flex flex-column align-items-center bg-dark-custom border-green mb-5 py-4 drag-area overflow-hidden">						
+							<div class="col-4 ">
+								<img class="my-3 img-fluid rounded-3" src="{{ url_for('static', filename='assets/upload.svg') }}">
+							</div>
+							<header class="text-center text-muted" id="message_upload">Click Or Drag & Drop to Upload File</header>			
+							<input type="file" class="form-control" id="file-upload" multiple hidden>							
+							<label class="w-50 btn btn-lg btn-green my-3" for="file-upload">Select a file</label>
+						</div>
+
+					</div>
+
+					<div class="form-floating text-muted my-3 ">
+						<input type="text" class="form-control" id="PASSWORD" name="password" placeholder="Password">
+						<label for="floatingPassword">Password</label>
+						
+					</div>
+
+					<div class="form-floating text-muted my-3 ">
+						<input type="text" class="form-control" id="FFLAG" name="fflag" placeholder="Fflag">
+						<label for="floatingPassword">Format Flag</label>
+					</div>
+
+					<button class="w-100 btn btn-lg btn-green my-3 border-black" type="submit" id="submit_button" value="Submit" >Submit</button>
+
+				</div>
+				
+				</div>
+			</div>
+		</main>
+	</div>
+
+</body>
+
+<script type="text/javascript" color="7,136,85" pointColor="7,92,56" opacity='1' zIndex="-2" count="1000" src="{{ url_for('static', filename='assets/canvas-nest.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/canvas-nest.umd.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+</html>

@@ -1,14 +1,14 @@
-# CTFileScan-WEB
+# CTFlagger
 This website is used to scan automatically files during CTF. *(Mainly used for steganography)*
 
 
 ## Setup : 
 
 ```bash
-git clone https://github.com/Vozec/CTFileScan-WEB.git ./CTFileScan-WEB
-cd CTFileScan-WEB
-docker build -t ctfweb .
-docker run --rm -it -p 8080:80 ctfweb
+git clone https://github.com/Vozec/CTFlagger.git ./CTFlagger
+cd CTFlagger
+docker compose build
+docker compose up
 ```
 The Website is available on your local machine on port *8080*
 
