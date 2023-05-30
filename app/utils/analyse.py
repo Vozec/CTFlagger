@@ -55,7 +55,12 @@ class Scanner(Thread):
 		Update_Progress(self.DB_CLIENT,self.hash,'%s/%s'%(scan_index,len(modules_filtred)))
 
 		result = {}
-		bad = [{"type":"file","path":"","content":""},{"type":"file","path":[],"content":""}]
+		bad = [
+			{"type":"file","path":"","content":""},
+			{"type":"file","path":[],"content":""},
+			{"type":"file","path":"","content":[]},
+			{"type":"file","path":[],"content":[]}
+		]
 		for mod in list(modules_filtred.items()):
 			try:
 				res = mod[1][0].scan(self.config)
