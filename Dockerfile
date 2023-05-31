@@ -40,8 +40,8 @@ RUN \
 
 # Crontab
 RUN \    
-    echo "@hourly server ${DOCUMENT_ROOT}/utils/auto-deletion.py" > /etc/cron.hourly/schedule ;\
-    chmod +x ${DOCUMENT_ROOT}/utils/auto-deletion.py ;\
+    echo "@hourly server ${DOCUMENT_ROOT}/auto-deletion.py" > /etc/cron.hourly/schedule ;\
+    chmod +x ${DOCUMENT_ROOT}/auto-deletion.py ;\
     chmod 600 /etc/cron.hourly/schedule ;
 
 RUN \
@@ -49,6 +49,6 @@ RUN \
     echo "cd ${DOCUMENT_ROOT}" >> /root/.bashrc;
 
 EXPOSE 5000
-# USER webmaster
-CMD ["flask","run"]
 
+# USER webmaster
+CMD ["flask","run","--cert=adhoc"]

@@ -70,3 +70,8 @@ chmod +x /usr/bin/stegopit
 wget https://github.com/syvaidya/openstego/releases/download/openstego-0.8.5/openstego_0.8.5-1_all.deb -O /tmp/openstego.deb
 apt install /tmp/openstego.deb
 rm /tmp/openstego.deb ;
+
+# acropalypse_png
+wget https://raw.githubusercontent.com/Absenti/acropalypse_png/e6571d9e48efec6359c2dedcf9110d32067bb80d/acropalypse_png.py -O /usr/bin/acropalypse_png
+sed -i '1s/^/#!\/usr\/bin\/python3\n# -*- coding: UTF-8 -*-\n/' /usr/bin/acropalypse_png
+chmod +x /usr/bin/acropalypse_png

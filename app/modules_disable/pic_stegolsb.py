@@ -29,12 +29,20 @@ def scan(config):
 	result_path = []
 
 	cpl = [
-		('/%s/StegoLSB_bruteforce.raw'%(config['hash']),open(path1,'rb').read()),
-		('/%s/StegoLSB_extract.raw'%(config['hash']),open(path2,'rb').read())
+		('/%s/StegoLSB_bruteforce.txt'%(config['hash']),open(path1,'rb').read()),
+		('/%s/StegoLSB_extract.txt'%(config['hash']),open(path2,'rb').read())
 	]
 
+	data = []
 	for c in cpl:
 		if c[1] != b'':
+			try:
+				data.append(c[1].decode())
+			except:
+				pass
 			result_path.append(c[0])
-	
-	return {"type":"file","path":result_path,"content":""}
+
+	print('StegoLSB  ')
+	print(data)
+
+	return {"type":"file","path":result_path,"content":data}
